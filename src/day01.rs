@@ -53,7 +53,7 @@ mod tests {
     fn sonar_sweep_returns_amount_of_increases() {
         let s = include_str!("../input/day1.txt"); // "198\n201\n208\n..."
         let measurements = buff_to_vec(&s);
-        assert_eq!(sonar_sweep(&measurements), 1266);
+        assert_eq!(sonar_sweep(&measurements), 1722);
     }
 
     #[test]
@@ -66,7 +66,7 @@ mod tests {
     fn sonar_sweep_filter_returns_amount_of_increases() {
         let s = include_str!("../input/day1.txt"); // "198\n201\n208\n..."
         let measurements = buff_to_vec(&s);
-        assert_eq!(sonar_sweep_filtered(&measurements), 1217);
+        assert_eq!(sonar_sweep_filtered(&measurements), 1748);
     }
 
     #[test]

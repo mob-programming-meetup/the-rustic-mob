@@ -87,8 +87,8 @@ forward 2"##;
         let input = include_str!("../input/day2.txt"); // "198\n201\n208\n..."
         let commands = input.lines().collect::<Vec<_>>();
         let loc = navigate(&commands);
-        assert_eq!(loc.horizontal_position, 1967);
-        assert_eq!(loc.depth, 1031);
-        assert_eq!(loc.depth * loc.horizontal_position, 2027977);
+        assert_eq!(loc.horizontal_position, 2065);
+        assert_eq!(loc.depth, 917);
+        assert_eq!(loc.depth * loc.horizontal_position, 1893605);
     }
 }
