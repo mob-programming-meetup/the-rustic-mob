@@ -1,26 +1,51 @@
 Taks for today.md
 
---- Part Two ---
-Based on your calculations, the planned course doesn't seem to make any sense. You find the submarine manual and discover that the process is actually slightly more complicated.
+--- Day 3: Binary Diagnostic ---
 
-In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:
+The submarine has been making some odd creaking noises, so you ask it to produce a
+diagnostic report just in case.
 
-down X increases your aim by X units.
-up X decreases your aim by X units.
-forward X does two things:
-It increases your horizontal position by X units.
-It increases your depth by your aim multiplied by X.
-Again note that since you're on a submarine, down and up do the opposite of what you might expect: "down" means aiming in the positive direction.
+The diagnostic report (your puzzle input) consists of a list of binary numbers which, when
+decoded properly, can tell you many useful things about the conditions of the
+submarine. The first parameter to check is the power consumption.
 
-Now, the above example does something different:
+You need to use the binary numbers in the diagnostic report to generate two new binary
+numbers (called the gamma rate and the epsilon rate). The power consumption can then be
+found by multiplying the gamma rate by the epsilon rate.
 
-forward 5 adds 5 to your horizontal position, a total of 5. Because your aim is 0, your depth does not change.
-down 5 adds 5 to your aim, resulting in a value of 5.
-forward 8 adds 8 to your horizontal position, a total of 13. Because your aim is 5, your depth increases by 8*5=40.
-up 3 decreases your aim by 3, resulting in a value of 2.
-down 8 adds 8 to your aim, resulting in a value of 10.
-forward 2 adds 2 to your horizontal position, a total of 15. Because your aim is 10, your depth increases by 2*10=20 to a total of 60.
-After following these new instructions, you would have a horizontal position of 15 and a depth of 60. (Multiplying these produces 900.)
+Each bit in the gamma rate can be determined by finding the most common bit in the
+corresponding position of all numbers in the diagnostic report. For example, given the
+following diagnostic report:
 
-Using this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?
+00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010
 
+Considering only the first bit of each number, there are five 0 bits and seven 1
+bits. Since the most common bit is 1, the first bit of the gamma rate is 1.
+
+The most common second bit of the numbers in the diagnostic report is 0, so the second bit
+of the gamma rate is 0.
+
+The most common value of the third, fourth, and fifth bits are 1, 1, and 0, respectively,
+and so the final three bits of the gamma rate are 110.
+
+So, the gamma rate is the binary number 10110, or 22 in decimal.
+
+The epsilon rate is calculated in a similar way; rather than use the most common bit, the
+least common bit from each position is used. So, the epsilon rate is 01001, or 9 in
+decimal. Multiplying the gamma rate (22) by the epsilon rate (9) produces the power
+consumption, 198.
+
+Use the binary numbers in your diagnostic report to calculate the gamma rate and epsilon
+rate, then multiply them together. What is the power consumption of the submarine? (Be
+sure to represent your answer in decimal, not binary.)
