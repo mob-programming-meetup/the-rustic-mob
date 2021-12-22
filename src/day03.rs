@@ -23,14 +23,14 @@ fn count_ones(lines: &[&str], column: usize) -> usize {
         .count()
 }
 
+use std::cmp::Ordering;
+
 fn most_frequent_digit(lines: &[&str], column: usize) -> char {
     let number_of_ones = count_ones(lines, column);
-    if number_of_ones > lines.len() / 2 {
-        '1'
-    } else if number_of_ones < lines.len() / 2 {
-        '0'
-    } else {
-        unimplemented!("Same occurrence of zeros and ones.")
+    match number_of_ones.cmp(&(lines.len() / 2)) {
+        Ordering::Greater => '1',
+        Ordering::Less => '0',
+        Ordering::Equal => unimplemented!("Same occurrence of zeros and ones."),
     }
 }
 
@@ -62,7 +62,7 @@ fn epsilon(lines: &[&str], gamma: usize) -> usize {
     gamma ^ mask
 }
 
-fn power_consumption(lines: &[&str]) -> usize {
+pub fn power_consumption(lines: &[&str]) -> usize {
     let gamma = gamma(lines);
     let epsilon = epsilon(lines, gamma);
     gamma * epsilon
@@ -156,6 +156,14 @@ mod tests {
     fn test_power_consumption() {
         let lines = test_input();
         assert_eq!(198, power_consumption(&lines));
+    }
+
+    #[test]
+    fn test_power_consumption_input_file() {
+        let lines = include_str!("../input/day3.txt")
+            .lines()
+            .collect::<Vec<_>>();
+        assert_eq!(3277364, power_consumption(&lines));
     }
 }
 
