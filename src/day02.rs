@@ -17,6 +17,7 @@ pub enum Command {
 struct Location {
     horizontal_position: usize,
     depth: usize,
+    aim: usize,
 }
 
 impl FromStr for Command {
@@ -46,6 +47,25 @@ fn navigate(commands: &[&str]) -> Location {
             Command::Forward(n) => location.horizontal_position += n,
             Command::Up(n) => location.depth -= n,
             Command::Down(n) => location.depth += n,
+        }
+    }
+    location
+}
+
+fn navigate_with_aim(commands: &[&str]) -> Location {
+    let mut location = Location::default();
+
+    // parse vector element
+    // split with whitespace
+    for cmd in commands {
+        let cmd = Command::from_str(cmd).unwrap();
+        match cmd {
+            Command::Forward(n) => {
+                location.horizontal_position += n;
+                location.depth += location.aim * n;
+            }
+            Command::Up(n) => location.aim -= n,
+            Command::Down(n) => location.aim += n,
         }
     }
     location
@@ -83,6 +103,19 @@ forward 2"##;
     }
 
     #[test]
+    fn navigate_with_aim_on_example_input() {
+        let input = r##"forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2"##;
+        let commands = input.lines().collect::<Vec<_>>();
+        let loc = navigate_with_aim(&commands);
+        assert_eq!(loc.horizontal_position * loc.depth, 900);
+    }
+
+    #[test]
     fn puzzle_input() {
         let input = include_str!("../input/day2.txt"); // "198\n201\n208\n..."
         let commands = input.lines().collect::<Vec<_>>();
@@ -90,5 +123,15 @@ forward 2"##;
         assert_eq!(loc.horizontal_position, 2065);
         assert_eq!(loc.depth, 917);
         assert_eq!(loc.depth * loc.horizontal_position, 1893605);
+    }
+
+    #[test]
+    fn puzzle_input_aim() {
+        let input = include_str!("../input/day2.txt"); // "198\n201\n208\n..."
+        let commands = input.lines().collect::<Vec<_>>();
+        let loc = navigate_with_aim(&commands);
+        assert_eq!(loc.horizontal_position, 2065);
+        assert_eq!(loc.depth, 1026990);
+        assert_eq!(loc.depth * loc.horizontal_position, 2120734350);
     }
 }
