@@ -69,7 +69,9 @@ pub fn power_consumption(lines: &[&str]) -> usize {
 }
 
 fn filter_column_by_most_common_digit(lines: &[&str], column: usize) -> Vec<&str> {
-    vec![]
+    let filteredLines: Vec<&str>   = vec![];
+    
+    filteredLines
 }
 
 #[cfg(test)]
