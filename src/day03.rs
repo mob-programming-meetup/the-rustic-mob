@@ -68,7 +68,9 @@ pub fn power_consumption(lines: &[&str]) -> usize {
     gamma * epsilon
 }
 
-fn filter_column_by_most_common_digit(lines: &[&str], column: usize) -> Vec<&str> {}
+fn filter_column_by_most_common_digit(lines: &[&str], column: usize) -> Vec<&str> {
+    vec![]
+}
 
 #[cfg(test)]
 mod tests {
