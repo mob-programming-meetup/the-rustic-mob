@@ -68,9 +68,18 @@ pub fn power_consumption(lines: &[&str]) -> usize {
     gamma * epsilon
 }
 
-fn filter_column_by_most_common_digit(lines: &[&str], column: usize) -> Vec<&str> {
-    let filteredLines: Vec<&str>   = vec![];
-    
+//   lines: Vec<&str>        Vec<&str> { size, capacity, pointer: Box<&[&str]> }       pointer -> [element1, element2]             element1 -> "hello"     element2 -> "world"
+//
+//
+//
+//   "hello"                          "world"
+//
+//   lines: &[element1, element2]  --> Vec<[element2]>
+//
+
+fn filter_column_by_most_common_digit<'a>(lines: &[&'a str], column: usize) -> Vec<&'a str> {
+    let filteredLines: Vec<&str> = vec![];
+
     filteredLines
 }
 
