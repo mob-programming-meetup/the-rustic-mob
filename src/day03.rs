@@ -165,6 +165,12 @@ mod tests {
             .collect::<Vec<_>>();
         assert_eq!(3277364, power_consumption(&lines));
     }
+
+    #[test]
+    fn test_filter_column_by_most_common_digit() {
+        let lines = test_input();
+        assert_eq!(7, filter_column_by_most_common_digit(&lines, 0));
+    }
 }
 
 /* Ideas for counting:
