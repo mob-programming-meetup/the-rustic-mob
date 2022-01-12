@@ -79,8 +79,11 @@ pub fn power_consumption(lines: &[&str]) -> usize {
 
 fn filter_column_by_most_common_digit<'a>(lines: &[&'a str], column: usize) -> Vec<&'a str> {
     let filteredLines: Vec<&str> = vec![];
+    let mostCommonDigit = most_frequent_digit(lines, column);
 
-    filteredLines
+    lines.filter(
+        |element| get_digit_at_position(element, column) == mostCommonDigit
+    ).collect()
 }
 
 #[cfg(test)]
