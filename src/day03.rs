@@ -68,6 +68,8 @@ pub fn power_consumption(lines: &[&str]) -> usize {
     gamma * epsilon
 }
 
+fn filter_column_by_most_common_digit(lines: &[&str], column: usize) -> Vec<&str> {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -169,7 +171,7 @@ mod tests {
     #[test]
     fn test_filter_column_by_most_common_digit() {
         let lines = test_input();
-        assert_eq!(7, filter_column_by_most_common_digit(&lines, 0));
+        assert_eq!(7, filter_column_by_most_common_digit(&lines, 0).len());
     }
 }
 
