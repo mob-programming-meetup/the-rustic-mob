@@ -1,6 +1,7 @@
-struct Counter {
-  zeros: usize,
-  ones: usize,
+pub fn day03(input: &str) {
+  let lines = input.lines().collect::<Vec<_>>();
+  println!("  Part 1:");
+  println!("    Power Consumption: {}", power_consumption(&lines));
 }
 
 // struct Counter {

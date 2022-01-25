@@ -1,3 +1,11 @@
+pub fn day01(input: &str) {
+  let measurements = buff_to_vec(input);
+  println!("  Part 1:");
+  println!("    Sonar Sweep: {}", sonar_sweep(&measurements));
+  println!("  Part 2:");
+  println!("    Sonar Sweep Filtered: {}", sonar_sweep_filtered(&measurements));
+}
+
 fn sonar_sweep(measurements: &[u32]) -> usize {
   measurements.windows(2).fold(0, |acc, win| {
     if win[0] < win[1] {

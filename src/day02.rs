@@ -1,5 +1,19 @@
 use std::str::FromStr;
 
+pub fn day02(input: &str) {
+  let commands = input.lines().collect::<Vec<_>>();
+  let loc = navigate(&commands);
+  println!("  Part 1:");
+  println!("    Depth: {}", loc.depth);
+  println!("    Horizontal Position: {}", loc.horizontal_position);
+  println!("    Depth * Horizontal Position: {}", loc.depth * loc.horizontal_position);
+  let loc = navigate_with_aim(&commands);
+  println!("  Part 2:");
+  println!("    Depth: {}", loc.depth);
+  println!("    Horizontal Position: {}", loc.horizontal_position);
+  println!("    Depth * Horizontal Position: {}", loc.depth * loc.horizontal_position);
+}
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 enum Command {
   Forward(usize),
