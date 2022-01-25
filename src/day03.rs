@@ -68,6 +68,25 @@ pub fn power_consumption(lines: &[&str]) -> usize {
     gamma * epsilon
 }
 
+//   lines: Vec<&str>        Vec<&str> { size, capacity, pointer: Box<&[&str]> }       pointer -> [element1, element2]             element1 -> "hello"     element2 -> "world"
+//
+//
+//
+//   "hello"                          "world"
+//
+//   lines: &[element1, element2]  --> Vec<[element2]>
+//
+
+fn filter_column_by_most_common_digit<'a>(lines: &[&'a str], column: usize) -> Vec<&'a str> {
+    let most_common_digit = most_frequent_digit(lines, column);
+
+    lines
+        .iter()
+        .filter(|&element| get_digit_at_position(element, column) == most_common_digit)
+        .copied()
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -164,6 +183,12 @@ mod tests {
             .lines()
             .collect::<Vec<_>>();
         assert_eq!(3277364, power_consumption(&lines));
+    }
+
+    #[test]
+    fn test_filter_column_by_most_common_digit() {
+        let lines = test_input();
+        assert_eq!(7, filter_column_by_most_common_digit(&lines, 0).len());
     }
 }
 
