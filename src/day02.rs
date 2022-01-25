@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
-pub enum Command {
+enum Command {
   Forward(usize),
   Up(usize),
   Down(usize),

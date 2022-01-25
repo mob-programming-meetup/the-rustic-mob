@@ -3,11 +3,16 @@ struct Counter {
   ones: usize,
 }
 
-impl Counter {
-  fn new() -> Self {
-    Self { zeros: 0, ones: 0 }
-  }
-}
+// struct Counter {
+//   zeros: usize,
+//   ones: usize,
+// }
+
+// impl Counter {
+//   fn new() -> Self {
+//     Self { zeros: 0, ones: 0 }
+//   }
+// }
 
 fn get_digit_at_position(input: &str, column: usize) -> char {
   input.chars().nth(column).unwrap()
