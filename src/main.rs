@@ -6,11 +6,7 @@ mod day01;
 mod day02;
 mod day03;
 
-fn invalid_func(_input: &str) {
-  panic!("Called the invalid function");
-}
-
-static FUNCS: &[fn(&str)] = &[invalid_func, day01::run, day02::run, day03::run];
+static FUNCS: &[fn(&str)] = &[day01::run, day02::run, day03::run];
 
 struct MainErr(String);
 
@@ -36,7 +32,7 @@ impl Error for MainErr {}
 
 fn solution(day: u8, name: &str, input: &str) {
   println!("Solution for Day {} ({})", day, name);
-  FUNCS[day as usize](input);
+  FUNCS[(day - 1) as usize](input);
   println!("---");
 }
 
