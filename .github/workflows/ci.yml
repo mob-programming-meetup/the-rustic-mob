@@ -3,9 +3,9 @@ name: Lint, formatting, documentation, builds and tests
 
 on:
   push:
-    branches: ['!mob/**']
+    branches: ['**', '!mob/**']
   pull_request:
-    branches: ['!mob/**']
+    branches: ['**', '!mob/**']
 
 env:
   CARGO_TERM_COLOR: always
