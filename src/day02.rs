@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-pub fn day02(input: &str) {
+pub fn run(input: &str) {
   let commands = input.lines().collect::<Vec<_>>();
   let loc = navigate(&commands);
   println!("  Part 1:");

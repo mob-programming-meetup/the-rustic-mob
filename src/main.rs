@@ -10,7 +10,7 @@ fn invalid_func(_input: &str) {
   panic!("Called the invalid function");
 }
 
-static FUNCS: &[fn(&str)] = &[invalid_func, day01::day01, day02::day02, day03::day03];
+static FUNCS: &[fn(&str)] = &[invalid_func, day01::run, day02::run, day03::run];
 
 struct MainErr(String);
 

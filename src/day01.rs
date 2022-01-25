@@ -1,4 +1,4 @@
-pub fn day01(input: &str) {
+pub fn run(input: &str) {
   let measurements = buff_to_vec(input);
   println!("  Part 1:");
   println!("    Sonar Sweep: {}", sonar_sweep(&measurements));

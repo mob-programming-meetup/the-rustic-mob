@@ -1,4 +1,4 @@
-pub fn day03(input: &str) {
+pub fn run(input: &str) {
   let lines = input.lines().collect::<Vec<_>>();
   println!("  Part 1:");
   println!("    Power Consumption: {}", power_consumption(&lines));
