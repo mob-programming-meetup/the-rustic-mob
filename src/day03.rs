@@ -69,16 +69,6 @@ pub fn power_consumption(lines: &[&str]) -> usize {
   gamma * epsilon
 }
 
-fn filter_column_by_most_common_digit<'a>(lines: &[&'a str], column: usize) -> Vec<&'a str> {
-  let most_common_digit = most_frequent_digit(lines, column);
-
-  lines
-    .iter()
-    .filter(|&element| get_digit_at_position(element, column) == most_common_digit)
-    .copied()
-    .collect()
-}
-
 #[cfg(test)]
 mod tests {
   use super::*;
@@ -174,11 +164,5 @@ mod tests {
   fn test_power_consumption_input_file() {
     let lines = include_str!("../puzzles/day03_input_Fred.txt").lines().collect::<Vec<_>>();
     assert_eq!(4138664, power_consumption(&lines));
-  }
-
-  #[test]
-  fn test_filter_column_by_most_common_digit() {
-    let lines = test_input();
-    assert_eq!(7, filter_column_by_most_common_digit(&lines, 0).len());
   }
 }
