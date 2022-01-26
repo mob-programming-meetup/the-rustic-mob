@@ -67,6 +67,10 @@ fn gamma(lines: &[&str]) -> usize {
   gamma
 }
 
+fn oxygen_rating(lines: &[&str]) -> usize {
+  todo!()
+}
+
 fn epsilon(lines: &[&str], gamma: usize) -> usize {
   let number_of_columns = number_of_columns(lines);
   let mask = 2_usize.pow(number_of_columns as u32) - 1; // e.g. for 5 columns : 0b00000111111
@@ -210,6 +214,13 @@ mod tests {
   fn test_filter_column_by_most_common_digit_for_oxygen() {
     let lines = test_input();
     assert_eq!(7, filter_column_by_most_common_digit_with_rating(&lines, 0, Rating::Oxygen).len());
+  }
+
+  #[test]
+  fn test_find_oxygen_rating() {
+    let lines = test_input();
+    let oxygen_rating = oxygen_rating(&lines);
+    assert_eq!(0b10111, oxygen_rating);
   }
 
   #[test]
