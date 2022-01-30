@@ -4,7 +4,7 @@
 
 tasks:
   - init: |
-      curl -sL install.mob.sh | sh
+      curl -sL install.mob.sh | sudo sh
       cargo build
     
 vscode:
