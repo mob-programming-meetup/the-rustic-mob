@@ -3,7 +3,8 @@ image: rust:latest
 
 tasks:
   - init: |
-      curl -sL install.mob.sh | sh -s - --user
+      apt-get update && apt-get install -y sudo
+      curl -sL install.mob.sh | sudo sh
       cargo build
     
 vscode:
