@@ -3,7 +3,7 @@ image: rust:latest
 
 tasks:
   - init: |
-      curl -sL install.mob.sh | sh
+      curl -sL install.mob.sh | sh -s - --user
       cargo build
     
 vscode:
