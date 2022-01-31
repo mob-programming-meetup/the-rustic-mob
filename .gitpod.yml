@@ -1,10 +1,9 @@
 # Checkout the docs => https://www.gitpod.io/docs/config-gitpod-file
-image: rust:latest
+image:
+  file: .gitpod.dockerfile
 
 tasks:
   - init: |
-      apt-get update && apt-get install -y sudo
-      curl -sL install.mob.sh | sudo sh
       cargo build
     
 vscode:
