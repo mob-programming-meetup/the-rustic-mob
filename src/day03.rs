@@ -95,7 +95,7 @@ mod tests {
   }
 
   fn test_input() -> Vec<&'static str> {
-    (indoc! {"
+    indoc! {"
       00100
       11110
       10110
@@ -108,7 +108,7 @@ mod tests {
       11001
       00010
       01010
-    "})
+    "}
     .lines()
     .collect::<Vec<_>>()
   }
