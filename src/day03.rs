@@ -2,6 +2,12 @@ pub fn run(input: &str) {
   let lines = input.lines().collect::<Vec<_>>();
   println!("  Part 1:");
   println!("    Power Consumption: {}", power_consumption(&lines));
+  println!("  Part 2:");
+  let oxygen_rating = oxygen_rating(&lines);
+  let co2_rating = co2_rating(&lines);
+  println!("    Oxygen Rating: {}", oxygen_rating);
+  println!("    CO2 Rating: {}", co2_rating);
+  println!("    Life Support Rating: {}", oxygen_rating * co2_rating);
 }
 
 // struct Counter {
@@ -32,16 +38,31 @@ enum Rating {
   None,
 }
 
-fn most_frequent_digit(lines: &[&str], column: usize, rating: Rating) -> char {
-  let number_of_ones = count_ones(lines, column);
-  match number_of_ones.cmp(&(lines.len() / 2)) {
-    Ordering::Greater => '1',
-    Ordering::Less => '0',
-    Ordering::Equal => match rating {
+impl From<Rating> for char {
+  fn from(rating: Rating) -> Self {
+    match rating {
       Rating::Oxygen => '1',
       Rating::CO2 => '0',
       Rating::None => unimplemented!("Same occurrence of zeros and ones."),
-    },
+    }
+  }
+}
+
+fn most_frequent_digit(lines: &[&str], column: usize, rating: Rating) -> char {
+  let number_of_ones = count_ones(lines, column);
+  match (number_of_ones * 2).cmp(&lines.len()) {
+    Ordering::Greater => '1',
+    Ordering::Less => '0',
+    Ordering::Equal => char::from(rating),
+  }
+}
+
+fn least_frequent_digit(lines: &[&str], column: usize, rating: Rating) -> char {
+  let number_of_ones = count_ones(lines, column);
+  match (number_of_ones * 2).cmp(&lines.len()) {
+    Ordering::Greater => '0',
+    Ordering::Less => '1',
+    Ordering::Equal => char::from(rating),
   }
 }
 
@@ -68,7 +89,37 @@ fn gamma(lines: &[&str]) -> usize {
 }
 
 fn oxygen_rating(lines: &[&str]) -> usize {
-  todo!()
+  let number_of_columns = number_of_columns(lines);
+
+  let mut filtered_lines = Vec::from(lines);
+  for column in 0..number_of_columns {
+    if filtered_lines.len() == 1 {
+      break;
+    }
+
+    filtered_lines = filter_column_by_most_common_digit_with_rating(&filtered_lines, column, Rating::Oxygen);
+  }
+
+  assert_eq!(filtered_lines.len(), 1);
+
+  usize::from_str_radix(filtered_lines[0], 2).unwrap()
+}
+
+fn co2_rating(lines: &[&str]) -> usize {
+  let number_of_columns = number_of_columns(lines);
+
+  let mut filtered_lines = Vec::from(lines);
+  for column in 0..number_of_columns {
+    if filtered_lines.len() == 1 {
+      break;
+    }
+
+    filtered_lines = filter_column_by_least_common_digit_with_rating(&filtered_lines, column, Rating::CO2);
+  }
+
+  assert_eq!(filtered_lines.len(), 1);
+
+  usize::from_str_radix(filtered_lines[0], 2).unwrap()
 }
 
 fn epsilon(lines: &[&str], gamma: usize) -> usize {
@@ -103,6 +154,20 @@ fn filter_column_by_most_common_digit_with_rating<'a>(
   lines
     .iter()
     .filter(|&element| get_digit_at_position(element, column) == most_common_digit)
+    .copied()
+    .collect()
+}
+
+fn filter_column_by_least_common_digit_with_rating<'a>(
+  lines: &[&'a str],
+  column: usize,
+  rating: Rating,
+) -> Vec<&'a str> {
+  let least_common_digit = least_frequent_digit(lines, column, rating);
+
+  lines
+    .iter()
+    .filter(|&element| get_digit_at_position(element, column) == least_common_digit)
     .copied()
     .collect()
 }
@@ -167,6 +232,13 @@ mod tests {
   }
 
   #[test]
+  fn test_least_frequent_digit() {
+    let lines = test_input();
+    assert_eq!('0', least_frequent_digit(&lines, 0, Rating::None));
+    assert_eq!('1', least_frequent_digit(&lines, 1, Rating::None));
+  }
+
+  #[test]
   fn test_count_zeros() {
     let lines = test_input();
     assert_eq!(7, count_ones(&lines, 0));
@@ -224,6 +296,13 @@ mod tests {
   }
 
   #[test]
+  fn test_find_co2_rating() {
+    let lines = test_input();
+    let co2_rating = co2_rating(&lines);
+    assert_eq!(0b01010, co2_rating);
+  }
+
+  #[test]
   fn test_most_frequent_digit_with_equal_ones_and_zeroes_for_oxygen() {
     let lines = vec!["0", "1"];
     assert_eq!('1', most_frequent_digit(&lines, 0, Rating::Oxygen));
@@ -233,5 +312,25 @@ mod tests {
   fn test_most_frequent_digit_with_equal_ones_and_zeroes_for_co2() {
     let lines = vec!["0", "1"];
     assert_eq!('0', most_frequent_digit(&lines, 0, Rating::CO2));
+  }
+
+  #[test]
+  fn test_for_filter() {
+    let input = vec!["11110", "10110", "10111", "10101", "11100", "10000", "11001"];
+    let expected = vec!["10110", "10111", "10101", "10000"];
+    assert_eq!(filter_column_by_most_common_digit_with_rating(&input, 1, Rating::Oxygen), expected);
+  }
+
+  #[test]
+  fn test_for_filter_least() {
+    let input = vec!["11110", "10110", "10111", "10101", "11100", "10000", "11001"];
+    let expected = vec!["11110", "11100", "11001"];
+    assert_eq!(filter_column_by_least_common_digit_with_rating(&input, 1, Rating::CO2), expected);
+  }
+
+  #[test]
+  fn test_most_freq_digit() {
+    let input = vec!["11110", "10110", "10111", "10101", "11100", "10000", "11001"];
+    assert_eq!(most_frequent_digit(&input, 1, Rating::Oxygen), '0');
   }
 }
