@@ -4,6 +4,9 @@
 tasks:
   - init: |
       curl -sL install.mob.sh | sudo sh
+      rustup install stable
+      rustup component add rustfmt clippy rust-src rust-docs
+      rustup component add rls rust-analysis llvm-tools-preview
       cargo build
 
 vscode:
