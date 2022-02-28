@@ -59,7 +59,7 @@ a similar process that involves filtering out values until only one remains. Bef
 searching for either rating value, start with the full list of binary numbers from your
 diagnostic report and consider just the first bit of those numbers. Then:
 
-    Keep only numbers selected by the bit criteria for the type of rating value for which
+    Keep only numbers selected by the bitm criteria for the type of rating value for which
     you are searching. Discard numbers which do not match the bit criteria.  If you only
     have one number left, stop; this is the rating value for which you are searching.
     Otherwise, repeat the process, considering the next bit to the right.
