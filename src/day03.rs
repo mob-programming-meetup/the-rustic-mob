@@ -10,17 +10,6 @@ pub fn run(input: &str) {
   println!("    Life Support Rating: {}", oxygen_rating * co2_rating);
 }
 
-// struct Counter {
-//   zeros: usize,
-//   ones: usize,
-// }
-
-// impl Counter {
-//   fn new() -> Self {
-//     Self { zeros: 0, ones: 0 }
-//   }
-// }
-
 fn get_digit_at_position(input: &str, column: usize) -> char {
   input.chars().nth(column).unwrap()
 }
@@ -134,6 +123,7 @@ pub fn power_consumption(lines: &[&str]) -> usize {
   gamma * epsilon
 }
 
+#[cfg(test)]
 fn filter_column_by_most_common_digit<'a>(lines: &[&'a str], column: usize) -> Vec<&'a str> {
   let most_common_digit = most_frequent_digit(lines, column, Rating::None);
 
