@@ -1,5 +1,9 @@
 use std::str::FromStr;
 
+pub fn run(input: &str) {
+  todo!()
+}
+
 // Ideas:
 // 01. bingo struct with from vec[string] - including board and sequences
 // 02. parsing the string to create the matrix
